@@ -1,0 +1,39 @@
+Normal flow: 
+When user tries to login to Gmail with correct credentials like username and password, it takes to the Gmail home page .
+
+Feature: Login Feature File
+Scenario: Login scenario test for Gmail
+Given navigate to Gmail page
+When user logged in using username as “username” and password as “password”
+Then home page should be displayed
+
+Error flow: 
+When user tries to login with wrong username or wrong Gmail pattern and wrong password. The error will be raised as mentioned below.
+
+Feature: Login Feature File
+Scenario: Login scenario test for Gmail
+Given navigate to Gmail page
+When user logged in using username as “wrong format” and password as “wrong password”
+Then raises an error code ‘Could not find your goggle account’
+
+
+
+
+After Login to the Gmail account user will sent mail to others, if a correct address is given in cc mail will be sent. Till that mail will be saved in the draft. Once the user click on the send button with proper cc address then the draft will be cleared and mail will be sent. 
+Normal flow: Sending emails to a valid recipient.
+Given I have an email draft addressed to someone with someone else as a Cc
+And I have written an email
+When I send the email
+Then I should be alerted that the email was sent successfully
+And the draft should no longer be available
+And the email should be sent
+And the email's details should correspond to the original draft that was sent
+
+When user tries to send mail with invalid recipient
+Error flow: Sending emails  to an invalid recipient
+Given an email draft addressed to someone with someone else as a Cc (with one email invalid)
+And I have written an email
+When I send the email
+Then the draft should remain open
+And I should be warned that the recipients are invalid
+And the email should not be sent
